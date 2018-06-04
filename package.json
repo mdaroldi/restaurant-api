@@ -1,0 +1,19 @@
+{
+  "name": "restaurant-api",
+  "version": "0.0.1",
+  "description": "Restaurant API for RESTful API course",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mdaroldi/restaurant-api.git"
+  },
+  "author": "Mauricio Aroldi <mauricio.aroldi@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mdaroldi/restaurant-api/issues"
+  },
+  "homepage": "https://github.com/mdaroldi/restaurant-api#readme"
+}
