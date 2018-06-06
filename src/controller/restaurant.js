@@ -50,6 +50,9 @@ export default({ config, db }) => {
                 res.send(err);
             }
             restaurant.name = req.body.name;
+            restaurant.foodtype = req.body.foodtype;
+            restaurant.avgcost = req.body.avgcost;
+            restaurant.geometry.coordinates = req.body.geometry.coordinates;
             restaurant.save(err => {
                 if (err) {
                     res.send(err);
