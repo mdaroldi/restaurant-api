@@ -67,5 +67,31 @@ export default({ config, db }) => {
         });
     });
 
+    // add review for a specific restaurant id
+    // '/v1/restaurant/reviews/add/:id'
+    api.post('/review/add/:id', (req, res) => {
+        Restaurant.findById(req.params.id, (err, restaurant) => {
+            if (err) {
+                res.send(err);
+            }
+            let newReview = new newReview();
+            newReview.title = req.body.title;
+            newReview.text = req.body.text;
+            newReview.restaurant = restaurant._id;
+            newReview.save((err, review) => {
+                if (err) {
+                    res.send(err);
+                }
+                restaurant.reviews.push(newReview);
+                restaurant.save(err => {
+                    if (err) {
+                        res.send(err);
+                    }
+                    res.json({message: 'Restaurant review saved'});
+                });
+            });
+        });
+    });
+
     return api;
 }
