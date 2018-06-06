@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 import { Router } from 'express';
 import Restaurant from '../model/restaurant';
+import Review from '../model/review';
 
 export default({ config, db }) => {
     let api = Router();
@@ -10,6 +11,9 @@ export default({ config, db }) => {
     api.post('/add', (req, res) => {
         let newRest = new Restaurant();
         newRest.name = req.body.name;
+        newRest.foodtype = req.body.foodtype;
+        newRest.avgcost = req.body.avgcost;
+        newRest.geometry.coordinates = req.body.geometry.coordinates;
 
         newRest.save(err => {
             if (err) {
@@ -69,12 +73,12 @@ export default({ config, db }) => {
 
     // add review for a specific restaurant id
     // '/v1/restaurant/reviews/add/:id'
-    api.post('/review/add/:id', (req, res) => {
+    api.post('/reviews/add/:id', (req, res) => {
         Restaurant.findById(req.params.id, (err, restaurant) => {
             if (err) {
                 res.send(err);
             }
-            let newReview = new newReview();
+            let newReview = new Review();
             newReview.title = req.body.title;
             newReview.text = req.body.text;
             newReview.restaurant = restaurant._id;
@@ -90,6 +94,17 @@ export default({ config, db }) => {
                     res.json({message: 'Restaurant review saved'});
                 });
             });
+        });
+    });
+
+    // get reviews for a specific restaurant id
+    // '/v1/restaurant/reviews/:id'
+    api.get('/reviews/:id', (req, res) => {
+        Review.find({restaurant: req.params.id}, (err, reviews) => {
+            if (err) {
+                res.send(err);
+            }
+            res.json(reviews);
         });
     });
 
