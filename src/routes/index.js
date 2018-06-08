@@ -15,7 +15,7 @@ initializeDb(db => {
 
     // api routes v1 (/v1)
     router.use('/restaurant', restaurant({ config, db}));
-    route.use('/account', account({ config, db}));
+    router.use('/account', account({ config, db}));
 
 });
 
