@@ -3,12 +3,14 @@ import { Router } from 'express';
 import Restaurant from '../model/restaurant';
 import Review from '../model/review';
 
+import { authenticate } from '../middleware/authMiddleware';
+
 export default({ config, db }) => {
     let api = Router();
 
     // CRUD - Create Read Update Delete
     // '/v1/restaurant/add' - Create
-    api.post('/add', (req, res) => {
+    api.post('/add', authenticate, (req, res) => {
         let newRest = new Restaurant();
         newRest.name = req.body.name;
         newRest.foodtype = req.body.foodtype;
@@ -24,7 +26,7 @@ export default({ config, db }) => {
     });
 
     // '/v1/restaurant' - Read
-    api.get('/', (req, res) => {
+    api.get('/', authenticate, (req, res) => {
         Restaurant.find({}, (err, restaurants) => {
             if (err) {
                 res.send(err);
