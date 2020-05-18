@@ -1,1 +1,6 @@
-# restaurant-api
+# Restaurant API
+--
+
+## Technologies:
+* JavaScript
+* MongoDB
